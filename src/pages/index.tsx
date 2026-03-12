@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { RPConfig } from "@pdf-viewer/react";
+import { RPConfig } from "@react-pdf-kit/viewer";
 import { LazyAppPdfViewer } from "../components/LazyAppPdfViewer";
 
 const IndexPage: React.FC<PageProps> = () => {
@@ -9,7 +9,7 @@ const IndexPage: React.FC<PageProps> = () => {
     <>
       {!isSSR && (
         <React.Suspense fallback={<div />}>
-          <RPConfig>
+          <RPConfig workerUrl={'/pdf.worker.min.mjs'}>
             <div className="container">
               <h1>RP Starter Toolkit: Gatsby + TypeScript</h1>
               <br />

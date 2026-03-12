@@ -1,8 +1,8 @@
-# React PDF Starter Toolkit in Gatsby and TypeScript
+# React PDF Starter Kit Toolkit in Gatsby and TypeScript
 
 [![Open example in codesandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/github/react-pdf-dev/starter-rp-gatsby-ts/main)
 
-Welcome to the React PDF Starter Toolkit! This repository provides a comprehensive guide on integrating React PDF with Gatsby and TypeScript. It showcases how React PDF can be integrated and rendered as part of a React.js project.
+Welcome to the React PDF Kit Starter Toolkit! This repository provides a comprehensive guide on integrating React PDF with Gatsby and TypeScript. It showcases how the React PDF Viewer component can be integrated and rendered as part of a React.js project.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ Welcome to the React PDF Starter Toolkit! This repository provides a comprehensi
 1. **Clone the Repository**: If you haven't already, clone the repository and navigate into the project directory.
 
    ```bash
-   git clone https://github.com/pdf-viewer-react/starter-rp-gatsby-ts.git
+   git clone https://github.com/react-pdf-kit/starter-rp-gatsby-ts.git
    cd starter-rp-gatsby-ts
    ```
 
@@ -36,7 +36,7 @@ Welcome to the React PDF Starter Toolkit! This repository provides a comprehensi
 
 ### Running the Example Project
 
-This repository includes an example project to demonstrate React PDF in action.
+This repository includes an example project to demonstrate React PDF Kit in action.
 
 1. **Start the Development Server**: Use the following command to start the development server
 
@@ -62,11 +62,11 @@ Once the example project is running, you can explore the source code to see how 
 import React, { FC } from "react";
 import {
   RPProvider,
-  RPDefaultLayout,
+  RPLayout,
   RPPages,
   RPLayoutProps,
   RPProviderProps,
-} from "@pdf-viewer/react";
+} from "@react-pdf-kit/viewer";
 
 type IProps = {
   showToolbar: boolean;
@@ -80,13 +80,13 @@ const AppPdfViewer: FC<Partial<IProps>> = (props) => {
 
   return (
     <RPProvider
-      src="https://cdn.codewithmosh.com/image/upload/v1721763853/guides/web-roadmap.pdf"
+      src="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf"
       {...providerProps}
     >
       {showToolbar ? (
-        <RPDefaultLayout {...defaultLayoutProps}>
+        <RPLayout toolbar {...defaultLayoutProps}>
           <RPPages />
-        </RPDefaultLayout>
+        </RPLayout>
       ) : (
         <div style={{ width: "100%", height: "550px" }}>
           <RPPages />
@@ -95,6 +95,8 @@ const AppPdfViewer: FC<Partial<IProps>> = (props) => {
     </RPProvider>
   );
 };
+
+export default AppPdfViewer;
 ```
 
 2. **Lazy Load the PDF Viewer Component**: Use React's lazy function to load the AppPdfViewer component only when it's needed
@@ -110,7 +112,7 @@ export const LazyAppPdfViewer =  React.lazy(()=> import("./AppPdfViewer"))
 ```tsx
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { RPConfig } from "@pdf-viewer/react";
+import { RPConfig } from "@react-pdf-kit/viewer";
 import { LazyAppPdfViewer } from "../components/LazyAppPdfViewer";
 
 const IndexPage: React.FC<PageProps> = () => {
@@ -119,7 +121,7 @@ const IndexPage: React.FC<PageProps> = () => {
     <>
       {!isSSR && (
         <React.Suspense fallback={<div />}>
-          <RPConfig>
+          <RPConfig workerUrl={'/pdf.worker.min.mjs'}>
             <div className="container">
               <h1>RP Starter Toolkit: Gatsby + TypeScript</h1>
               <br />
@@ -145,6 +147,8 @@ const IndexPage: React.FC<PageProps> = () => {
     </>
   );
 };
+
+export default IndexPage;
 ```
 
 ## Examples
@@ -157,13 +161,13 @@ For more examples, please refer to the `src/pages/index.tsx` file in this reposi
 
 _Remark: If you would like more examples, feel free open an issue._
 
-For more configurations, please check the [documentation](https://docs.react-pdf.dev) site.
+For more configurations, please check the [documentation]( https://docs.react-pdf-kit.dev/) site.
 
 ## Meta
 
-- Homepage: [https://www.react-pdf.dev](https://www.react-pdf.dev)
-- Docs: [https://docs.react-pdf.dev](https://docs.react-pdf.dev)
+- Homepage: [https://www.react-pdf-kit.dev](https://www.react-pdf-kit.dev)
+- Docs: [https://docs.react-pdf-kit.dev](https://docs.react-pdf-kit.dev)
 
 ---
 
-Thank you for using React PDF! We hope this toolkit helps you build amazing React.js applications. If you have any questions or need further assistance on this example, please feel free to open an issue. Happy coding!
+Thank you for using React PDF Kit! We hope this toolkit helps you build amazing React.js applications. If you have any questions or need further assistance on this example, please feel free to open an issue. Happy coding!
